@@ -9,7 +9,7 @@ class UnsupportedFormatError(StreamStatsError):
 
 
 class InvalidEventError(StreamStatsError):
-    """Неверные параметры события, не включая временную метку."""
+    """Неверное событие"""
 
 
 class InvalidTimestampError(StreamStatsError):
