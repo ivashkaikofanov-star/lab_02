@@ -13,10 +13,10 @@ def build_report(stats: dict) -> dict:
 
     Args:
         stats: Статистика полученного файла в виде словаря.
-    
+
     Returns:
         report: Отчёт в виде словаря, где указаны:
-            общее количество валидных событий("total"), 
+            общее количество валидных событий("total"),
             количество событий по уровням логирования("by_level"),
             количество событий по источникам("by_source"),
             самая ранняя временная метка("first_timestamp"),
@@ -55,12 +55,12 @@ def build_report(stats: dict) -> dict:
 def report_json(report: dict, path: str | None) -> None:
     """
     Запись отчёта в JSON-файл или вывод отчёта в JSON-формате в консоль.
-    
+
     Args:
         report: Словарь с отчётом, который мы получили в функции
             build_report.
         path: Путь, по которому будет записан JSON-файл.
-    
+
     Raises:
         CLIConfigurationError: Файл уже существует.
     """
