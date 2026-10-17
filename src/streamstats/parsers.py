@@ -2,7 +2,9 @@
 import csv
 import json
 import logging
+from collections.abc import Iterator
 from datetime import datetime
+from typing import TextIO
 
 from streamstats.errors import (
     InvalidEventError,
@@ -13,7 +15,7 @@ from streamstats.errors import (
 logger = logging.getLogger(__name__)
 
 
-def make_event(raw_dictionary, line_number):
+def make_event(raw_dictionary: dict, line_number: int) -> dict:
     """
     Валидация одной строки файла, полученной в виде словаря.
 
@@ -22,7 +24,7 @@ def make_event(raw_dictionary, line_number):
         line_number: Номер строки в файле, на которой он был расположен.
 
     Returns:
-        dict: Словарь события с ключами timestamp, level, source, message.
+        dictionary: Словарь события с ключами timestamp, level, source, message.
 
     Raises:
         InvalidTimestampError: Если в строке отсутствует временная метка
@@ -80,7 +82,9 @@ def make_event(raw_dictionary, line_number):
     return dictionary
 
 
-def parse_csv(file_csv, stats, skip_invalid):
+def parse_csv(
+        file_csv: TextIO, stats: dict, skip_invalid: bool
+) -> Iterator[dict]:
     """
     Преобразование CSV-файла в генератор, который при
     каждом обращении будет выдавать словарь из новой строки,
@@ -133,7 +137,9 @@ def parse_csv(file_csv, stats, skip_invalid):
             raise
 
 
-def parse_jsonl(file_jsonl, stats, skip_invalid):
+def parse_jsonl(
+        file_jsonl: TextIO, stats: dict, skip_invalid: bool
+) -> Iterator[dict]:
     """
     Преобразование каждой строки JSONL-файла в отдельный словарь.
 
