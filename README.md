@@ -66,6 +66,7 @@ python -m streamstats analyze INPUT --format csv --from 2026-10-06T10:00:00 --to
 
 ## Структура
 
+```text
 lab_02/
 ├── pyproject.toml
 ├── README.md
@@ -85,6 +86,7 @@ lab_02/
     ├── test_analysis.py     - тесты для подсчёта статистики
     ├── test_cli.py          - тесты для проверки работы аргументов
     └── test_integration.py  - сквозные тесты (запуск программы целиком)
+```
 
 ## Тесты
 
