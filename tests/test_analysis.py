@@ -4,7 +4,7 @@ from streamstats.analysis import init_stats, update_stat
 
 
 def test_init_stats():
-    """Проверка, что пустая статистика создается правильно."""
+    """Пустая статистика создается правильно."""
     stats = init_stats()
     assert stats["total"] == 0
     assert stats["by_source"] == {}
@@ -17,7 +17,7 @@ def test_init_stats():
 
 
 def test_update_stat_total_and_levels():
-    """Проверка обновления общего счетчика и уровней."""
+    """Обновление общего счетчика и уровней."""
     stats = init_stats()
     event_1 = {
         "timestamp": datetime.fromisoformat("2000-01-23T05:04:36+05:00"),
@@ -62,7 +62,7 @@ def test_update_stat_sources_and_errors():
 
 
 def test_update_stat_timestamps():
-    """Проверка, что first_timestamp и last_timestamp обновляются верно."""
+    """first_timestamp и last_timestamp обновляются верно."""
     stats = init_stats()
     event_1 = {
         "timestamp": datetime.fromisoformat("2008-10-02T22:10:22+00:00"),

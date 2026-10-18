@@ -4,8 +4,8 @@ import sys
 from streamstats.__main__ import build_parser
 
 
-def test_cli_help_exit_code():
-    """Проверка, что --help выводит справку и код 0."""
+def test_help_exit_code():
+    """--help выводит справку и код 0."""
     result = subprocess.run(
         [sys.executable, "-m", "streamstats", "--help"],
         capture_output=True,
@@ -17,8 +17,8 @@ def test_cli_help_exit_code():
     assert result.stderr == ""
 
 
-def test_cli_invalid_format():
-    """Проверка, что неверный формат вызывает ошибку."""
+def test_invalid_format():
+    """Неверный формат вызывает ошибку."""
     result = subprocess.run(
         [
             sys.executable, "-m", "streamstats",
@@ -32,8 +32,8 @@ def test_cli_invalid_format():
     assert "invalid choice: 'xml'" in result.stderr
 
 
-def test_cli_absence_from():
-    """Проверка, что отсутствие --format вызывает ошибку."""
+def test_absence_from():
+    """Отсутствие --format вызывает ошибку."""
     result = subprocess.run(
         [sys.executable, "-m", "streamstats", "analyze", "file.csv"],
         capture_output=True,
@@ -45,7 +45,7 @@ def test_cli_absence_from():
 
 
 def test_build_parser_valid_args():
-    """Проверяка, что build_parser правильно парсит валидные аргументы."""
+    """build_parser правильно парсит валидные аргументы."""
     parser = build_parser()
     args = parser.parse_args([
         "analyze", "file1.csv", "file2.jsonl",

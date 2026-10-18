@@ -8,7 +8,7 @@ from streamstats.parsers import parse_csv
 
 
 def test_parse_csv_valid(valid_csv):
-    """Проверка, что валидный CSV парсится полностью."""
+    """Валидный CSV парсится полностью."""
     stats = init_stats()
     with open(valid_csv, "r", encoding="utf-8") as file:
         events = list(parse_csv(file, stats, False))
@@ -25,7 +25,7 @@ def test_parse_csv_valid(valid_csv):
 
 
 def test_parse_csv_invalid_timestamp(tmp_path):
-    """Проверка, что неверный timestamp вызывает ошибку."""
+    """Неверный timestamp вызывает ошибку."""
     bad_file = tmp_path / "bad_time.csv"
     bad_file.write_text(
         "timestamp,level,source,message\n"
@@ -40,7 +40,7 @@ def test_parse_csv_invalid_timestamp(tmp_path):
 
 
 def test_parse_csv_invalid_level(tmp_path):
-    """Проверка, что неверный level вызывает ошибку."""
+    """Неверный level вызывает ошибку."""
     bad_file = tmp_path / "bad_level.csv"
     bad_file.write_text(
         "timestamp,level,source,message\n"
@@ -66,7 +66,7 @@ def test_parse_csv_empty_file(tmp_path):
 
 
 def test_parse_csv_skip_invalid(tmp_path):
-    """Проверка, что с флагом skip_invalid битые строки пропускаются."""
+    """С флагом skip_invalid битые строки пропускаются."""
     bad_file = tmp_path / "skip.csv"
     bad_file.write_text(
         "timestamp,level,source,message\n"
@@ -84,7 +84,7 @@ def test_parse_csv_skip_invalid(tmp_path):
 
 
 def test_parse_csv_unicode(tmp_path):
-    """Проверка, что сообщения сохраняются в исходном виде."""
+    """Сообщения сохраняются в исходном виде."""
     unicode_file = tmp_path / "unicode.csv"
     unicode_file.write_text(
         "timestamp,level,source,message\n"

@@ -8,7 +8,7 @@ from streamstats.parsers import parse_jsonl
 
 
 def test_parse_jsonl_valid(valid_jsonl):
-    """Проверка, что валидный JSONL парсится полностью."""
+    """Валидный JSONL парсится полностью."""
     stats = init_stats()
     with open(valid_jsonl, "r", encoding="utf-8") as file:
         events = list(parse_jsonl(file, stats, False))
@@ -31,7 +31,7 @@ def test_parse_jsonl_valid(valid_jsonl):
 
 
 def test_parse_jsonl_invalid_json(tmp_path):
-    """Проверка, что неверный JSON вызывает InvalidEventError."""
+    """Неверный JSON вызывает InvalidEventError."""
     bad_file = tmp_path / "bad.jsonl"
     bad_file.write_text(
         '{"timestamp": "1999-10-08T04:00:11+06:07", "level": "INFO", '
@@ -50,7 +50,7 @@ def test_parse_jsonl_invalid_json(tmp_path):
 
 
 def test_parse_jsonl_invalid_timestamp(tmp_path):
-    """Проверка, что неверный timestamp вызывает InvalidTimestampError."""
+    """Неверный timestamp вызывает InvalidTimestampError."""
     bad_file = tmp_path / "bad_time.jsonl"
     bad_file.write_text(
         '{"timestamp": "19999999-10-08T04:00:11+06:07", "level": "INFO", '
@@ -66,7 +66,7 @@ def test_parse_jsonl_invalid_timestamp(tmp_path):
 
 
 def test_parse_jsonl_empty_file(tmp_path):
-    """Проверка, что пустой файл возвращает 0 событий."""
+    """Пустой файл возвращает 0 событий."""
     empty_file = tmp_path / "empty.jsonl"
     empty_file.write_text("", encoding="utf-8")
     stats = init_stats()
@@ -76,7 +76,7 @@ def test_parse_jsonl_empty_file(tmp_path):
 
 
 def test_parse_jsonl_skip_invalid(tmp_path):
-    """Проверяка, что с флагом skip_invalid битые строки пропускаются."""
+    """С флагом skip_invalid битые строки пропускаются."""
     bad_file = tmp_path / "skip.jsonl"
     bad_file.write_text(
         '{"timestamp": "2026-10-06T10:00:00+00:00", "level": "INFO", '
@@ -96,7 +96,7 @@ def test_parse_jsonl_skip_invalid(tmp_path):
 
 
 def test_parse_jsonl_unicode(tmp_path):
-    """Проверка, что сообщения сохраняются в исходном виде."""
+    """Сообщения сохраняются в исходном виде."""
     unicode_file = tmp_path / "unicode.jsonl"
     unicode_file.write_text(
         '{"timestamp": "2024-07-02T08:23:00+05:00","level": "INFO", '
