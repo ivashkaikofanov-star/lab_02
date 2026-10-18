@@ -182,3 +182,9 @@ def parse_jsonl(
                 logger.warning(e)
                 continue
             raise
+
+
+PARSER_REPOSITORY = {
+    "csv": parse_csv,
+    "jsonl": parse_jsonl
+}
