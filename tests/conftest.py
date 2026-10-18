@@ -5,7 +5,7 @@ import pytest
 
 @pytest.fixture(autouse=True)
 def disable_logging():
-    """Отключает логирование во время тестов."""
+    """Отключение логирования во время тестов."""
     logging.disable(logging.CRITICAL)
     yield
     logging.disable(logging.NOTSET)
@@ -13,7 +13,7 @@ def disable_logging():
 
 @pytest.fixture
 def valid_csv(tmp_path):
-    """Создает временный CSV-файл с валидными данными."""
+    """Создание временного CSV-файл с валидными данными."""
     path = tmp_path / "test_valide.csv"
     path.write_text(
         "timestamp,level,source,message\n"
@@ -26,7 +26,7 @@ def valid_csv(tmp_path):
 
 @pytest.fixture
 def valid_jsonl(tmp_path):
-    """Создает временный JSONL-файл с валидными данными."""
+    """Создание временного JSONL-файла с валидными данными."""
     path = tmp_path / "test_valide.jsonl"
     path.write_text(
         '{"timestamp": "2222-11-01T12:09:58+00:00", '
@@ -37,5 +37,6 @@ def valid_jsonl(tmp_path):
         '"level": "INFO", "source": "api", "message": ""}\n',
         encoding="utf-8"
     )
+    return path
 
 

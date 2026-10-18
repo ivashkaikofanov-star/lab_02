@@ -8,7 +8,7 @@ from streamstats.parsers import parse_csv
 
 
 def test_parse_csv_valid(valid_csv):
-    """Проверяет, что валидный CSV парсится полностью."""
+    """Проверка, что валидный CSV парсится полностью."""
     stats = init_stats()
     with open(valid_csv, "r", encoding="utf-8") as file:
         events = list(parse_csv(file, stats, False))
@@ -25,7 +25,7 @@ def test_parse_csv_valid(valid_csv):
 
 
 def test_parse_csv_invalid_timestamp(tmp_path):
-    """Проверяет, что неверный timestamp вызывает ошибку."""
+    """Проверка, что неверный timestamp вызывает ошибку."""
     bad_file = tmp_path / "bad_time.csv"
     bad_file.write_text(
         "timestamp,level,source,message\n"
@@ -40,7 +40,7 @@ def test_parse_csv_invalid_timestamp(tmp_path):
 
 
 def test_parse_csv_invalid_level(tmp_path):
-    """Проверяет, что неверный level вызывает ошибку."""
+    """Проверка, что неверный level вызывает ошибку."""
     bad_file = tmp_path / "bad_level.csv"
     bad_file.write_text(
         "timestamp,level,source,message\n"
@@ -56,7 +56,7 @@ def test_parse_csv_invalid_level(tmp_path):
 
 
 def test_parse_csv_empty_file(tmp_path):
-    """Проверяет, что пустой файл возвращает пустой список (0 событий)."""
+    """Проверка, что пустой файл возвращает пустой список (0 событий)."""
     empty_file = tmp_path / "empty.csv"
     empty_file.write_text("", encoding="utf-8")
     stats = init_stats()
@@ -66,7 +66,7 @@ def test_parse_csv_empty_file(tmp_path):
 
 
 def test_parse_csv_skip_invalid(tmp_path):
-    """Проверяет, что с флагом skip_invalid битые строки пропускаются."""
+    """Проверка, что с флагом skip_invalid битые строки пропускаются."""
     bad_file = tmp_path / "skip.csv"
     bad_file.write_text(
         "timestamp,level,source,message\n"
