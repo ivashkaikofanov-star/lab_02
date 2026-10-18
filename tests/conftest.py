@@ -31,8 +31,10 @@ def valid_jsonl(tmp_path):
     path.write_text(
         '{"timestamp": "2222-11-01T12:09:58+00:00", '
         '"level": "WARNING", "source": "worker", "message": ""}\n'
-        '{"timestamp": "2020-11-06T10:01:56+01:00", '
-        '"level": "ERROR", "source": "web", "message": "lololo"}\n',
+        '{"timestamp": "2020-10-06T10:01:56+01:00", '
+        '"level": "ERROR", "source": "web", "message": "lololo"}\n'
+        '{"timestamp": "1029-07-05T10:03:56+02:00", '
+        '"level": "INFO", "source": "api", "message": ""}\n',
         encoding="utf-8"
     )
 
