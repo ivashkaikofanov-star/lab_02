@@ -61,6 +61,19 @@ def build_parser() -> argparse.ArgumentParser:
 def apply_filters(
         dictionary: Iterator[dict], args: argparse.Namespace
     ) -> Iterator[dict]:
+    """
+    Фильтрация событий по времени, уровню и источнику.
+
+    Args:
+        dictionary: Генератор событий (словарей) из парсера.
+        args: Объект с аргументами командной строки.
+
+    Yields:
+        event: Словарь после фильтрации.
+
+    Raises:
+        CLIConfigurationError: Неверный формат времени для --from или --to.
+    """
     if args.from_time:
         try:
             timestamp_from_time = datetime.fromisoformat(args.from_time)
@@ -88,6 +101,16 @@ def apply_filters(
 
 
 def run_analyze(args: argparse.ArgumentParser) -> None:
+    """
+    Обработка файлов, сбор статистики и сохранение отчётов.
+
+    Args:
+        args: Объект с аргументами командной строки.
+
+    Raises:
+        CLIConfigurationError: Файл уже существует или 
+            неверное количество форматов или несоответствие формата файла.
+    """
     if args.output:
         output_csv = args.output.replace(".json", ".csv")
         if os.path.exists(output_csv):
@@ -132,6 +155,12 @@ def run_analyze(args: argparse.ArgumentParser) -> None:
 
 
 def main() -> int:
+    """
+    Точка входа программы.
+
+    Returns:
+        int: Код завершения программы(0 или 2).
+    """
     parser = build_parser()
     args = parser.parse_args()
     logging.basicConfig(
