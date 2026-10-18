@@ -1,0 +1,50 @@
+Привет, дорогой друг, это инструкция по использованию потокового анализатора файлов.
+
+Как пользоваться анализатором:
+
+1. Во всех командах на месте --format можно вводить либо csv, либо jsonl.
+2. Если нужна обработка одного файла и вывод результата в консоль:
+
+python -m streamstats analyze INPUT --format jsonl
+
+На месте INPUT нужно вставить путь к входному файлу.
+
+3. Если нужно, чтобы игнорировались битые и пустые строки, а статистика учитывала только валидные строки:
+
+python -m streamstats analyze INPUT --format csv --skip-invalid
+
+4. Если нужно, чтобы файл отчёта сохранился на определённое место в памяти в формате csv и json:
+
+python -m streamstats analyze INPUT --format csv --output REPORT.json
+
+Нужно указать путь к файлу JSON (с расширением .json).
+Программа создаст этот JSON-файл и дополнительно положит рядом CSV-файл с тем же именем.
+Изначально самого файла REPORT.json и файла REPORT.csv не должно быть на диске.
+
+5. Если нужно обработать сразу несколько файлов с разными или одинаковыми форматами и вывести общую статистику:
+
+python -m streamstats analyze INPUT [INPUT ...] --format jsonl csv --output REPORT
+python -m streamstats analyze INPUT [INPUT ...] --format csv --output REPORT
+
+На месте INPUT [INPUT ...] нужно ввести все пути для файлов, которые хотим обработать,
+а после --format пишем либо расширение для каждого файла в порядке их добавления,
+либо одно расширение, если оно у всех файлов одинаковое.
+
+6. Если мы хотим использовать ленивые фильтры по времени, уровню, источнику:
+
+python -m streamstats analyze INPUT --format csv --level
+python -m streamstats analyze INPUT --format csv --source
+python -m streamstats analyze INPUT --format csv --from START_TIME --to END_TIME
+python -m streamstats analyze INPUT --format csv --from START_TIME
+python -m streamstats analyze INPUT --format csv --to END_TIME
+
+После флага --level нужно указать один или несколько уровней
+(DEBUG | INFO | WARNING | ERROR | CRITICAL), по которым будем фильтровать файл.
+
+После флага --source нужно указать один или несколько источников, по которым будем фильтровать файл.
+
+После флага --from и после флага --to на месте START_TIME и END_TIME нужно указать время строго
+в формате ISO 8601.
+
+Стандарт ISO 8601: YYYY-MM-DDTHH:MM:SS±HH:MM, где YYYY - год, MM - месяц, DD - день,
+T - разделитель даты и времени, HH - часы, MM - минуты, SS - секунды, ±HH:MM - часовой пояс.
