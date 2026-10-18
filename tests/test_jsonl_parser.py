@@ -93,3 +93,17 @@ def test_parse_jsonl_skip_invalid(tmp_path):
     assert events[0]["source"] == "db"
     assert events[1]["source"] == "web"
     assert stats["skipped"] == 1
+
+
+def test_parse_jsonl_unicode(tmp_path):
+    """Проверка, что сообщения сохраняются в исходном виде."""
+    unicode_file = tmp_path / "unicode.jsonl"
+    unicode_file.write_text(
+        '{"timestamp": "2024-07-02T08:23:00+05:00","level": "INFO", '
+        '"source": "api","message": "Print Привет мир"}\n',
+        encoding="utf-8"
+    )
+    stats = init_stats()
+    with open(unicode_file, "r", encoding="utf-8") as file:
+        events = list(parse_jsonl(file, stats, False))
+    assert events[0]["message"] == "Print Привет мир"

@@ -83,5 +83,19 @@ def test_parse_csv_skip_invalid(tmp_path):
     assert stats["skipped"] == 1
 
 
+def test_parse_csv_unicode(tmp_path):
+    """Проверка, что сообщения сохраняются в исходном виде."""
+    unicode_file = tmp_path / "unicode.csv"
+    unicode_file.write_text(
+        "timestamp,level,source,message\n"
+        "2024-07-02T08:23:00+05:00,INFO,api,Print Привет мир\n",
+        encoding="utf-8"
+    )
+    stats = init_stats()
+    with open(unicode_file, "r", encoding="utf-8") as file:
+        events = list(parse_csv(file, stats, False))
+    assert events[0]["message"] == "Print Привет мир"
+
+
 
 
