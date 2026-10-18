@@ -67,23 +67,24 @@ python -m streamstats analyze INPUT --format csv --from 2026-10-06T10:00:00 --to
 ## Структура
 
 lab_02/
-  pyproject.toml
-  README.md
-  parser_epilog.txt      - текст для вывода в разделе --help
-  src/streamstats/
-    __init__.py
-    __main__.py          - точка входа CLI
-    parsers.py           - парсеры CSV и JSONL
-    analysis.py          - ядро статистики
-    report.py            - формирование JSON и CSV отчётов
-    errors.py            - свои классы исключений
-  tests/
-    conftest.py          - общие фикстуры для тестов
-    test_csv_parser.py   - тесты для CSV-парсера
-    test_jsonl_parser.py - тесты для JSONL-парсера
-    test_analysis.py     - тесты для подсчёта статистики
-    test_cli.py          - тесты для проверки работы аргументов командной строки
-    test_integration.py  - сквозные тесты (запуск программы целиком от начала до конца)
+├── pyproject.toml
+├── README.md
+├── parser_epilog.txt      - текст для вывода в разделе --help
+├── src/
+│   └── streamstats/
+│       ├── __init__.py
+│       ├── __main__.py    - точка входа CLI
+│       ├── parsers.py     - парсеры CSV и JSONL
+│       ├── analysis.py    - ядро статистики
+│       ├── report.py      - формирование JSON и CSV отчётов
+│       └── errors.py      - свои классы исключений
+└── tests/
+    ├── conftest.py          - общие фикстуры для тестов
+    ├── test_csv_parser.py   - тесты для CSV-парсера
+    ├── test_jsonl_parser.py - тесты для JSONL-парсера
+    ├── test_analysis.py     - тесты для подсчёта статистики
+    ├── test_cli.py          - тесты для проверки работы аргументов
+    └── test_integration.py  - сквозные тесты (запуск программы целиком)
 
 ## Тесты
 
